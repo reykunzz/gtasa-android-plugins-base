@@ -25,14 +25,9 @@ jobs:
       - name: Build Mod
         shell: bash
         run: |
-          NDK="$ANDROID_NDK_HOME"
-          echo "NDK: $NDK"
-          test -f "$NDK/ndk-build" || { echo "ndk-build tidak ditemukan"; exit 1; }
-          bash "$NDK/ndk-build" \
-            NDK_PROJECT_PATH=. \
-            APP_BUILD_SCRIPT=Android.mk \
-            NDK_APPLICATION_MK=Application.mk \
-            NDK_DEBUG=0
+          echo "$ANDROID_NDK_HOME" > NDKPath.txt
+          chmod +x build.sh
+          ./build.sh
             
       - name: Prepare Binary
         run: |
