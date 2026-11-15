@@ -1,19 +1,15 @@
 #include <mod/amlmod.h>
 #include <mod/logger.h>
-#include <plugin-sdk/game_sa/Events.h>
-#include <plugin-sdk/renderware/imgui/imgui_impl_renderware.h>
-#include <src/gui.h>
-#include <src/logic.h>
 
-MYMOD(xavion.modtemplate, ModTemplate, 1.0, 0xavion)
+#include "src/reflection_config.h"
+#include "src/reflection_policy.h"
+
+// AML registration pattern follows the public GTASA Android AML template.
+// This plugin currently initializes policy only; no RenderWare hook is installed.
+MYMOD(hdreflection.balanced, HDReflection, 0.2, HDReflection)
 
 ON_MOD_LOAD() {
-    logger->SetTag("Mod Template");
-    logger->Info("Mod Template loading...");
-
-    ImGui_ImplRenderWare_Init(Gui::Draw);
-    Events::shutdownRwEvent += Gui::Shutdown;
-    Events::shutdownRwEvent += Logic::Shutdown;
-
-    logger->Info("Mod Template loaded successfully");
+    logger->SetTag("HD Reflection");
+    logger->Info("HD Reflection Balanced loaded (GTA SA 2.10 ARM64).");
+    logger->Info("Renderer pass is not enabled; policy scaffold only.");
 }
