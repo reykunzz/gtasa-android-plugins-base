@@ -24,8 +24,14 @@ jobs:
           ndk-version: r27c
 
       - name: Build Mod
-        run: ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk NDK_APPLICATION_MK=Application.mk NDK_DEBUG=0
-
+  shell: bash
+  run: |
+    echo "NDK path: $ANDROID_NDK_HOME"
+    "$ANDROID_NDK_HOME/ndk-build" \
+      NDK_PROJECT_PATH=. \
+      APP_BUILD_SCRIPT=Android.mk \
+      NDK_APPLICATION_MK=Application.mk \
+      NDK_DEBUG=0
       - name: Prepare Binary
         run: cp libs/arm64-v8a/libmodtemplate.so ./HDReflection-arm64-v8a.so
 
