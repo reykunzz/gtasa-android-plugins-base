@@ -27,28 +27,14 @@ jobs:
       - name: Build Mod
         shell: bash
         run: |
-<<<<<<< HEAD
-          echo "NDK HOME: $ANDROID_NDK_HOME"
-          echo "GNUMAKE: ${GNUMAKE:-not set}"
-          ls -l "$ANDROID_NDK_HOME/ndk-build"
-          command -v make
-=======
           echo "=== NDK HOME ==="
           echo "$ANDROID_NDK_HOME"
-
           echo "=== NDK BUILD SCRIPT ==="
           cat "$ANDROID_NDK_HOME/ndk-build"
-
           echo "=== INTERNAL NDK BUILD ==="
           ls -l "$ANDROID_NDK_HOME/build/ndk-build"
           file "$ANDROID_NDK_HOME/build/ndk-build"
-
           echo "=== START BUILD ==="
-          echo "$ANDROID_NDK_HOME" > NDKPath.txt
-          chmod +x build.sh
-          bash -x ./build.sh
- run: |
->>>>>>> 124eb50 (Inspect NDK build scripts)
           echo "$ANDROID_NDK_HOME" > NDKPath.txt
           chmod +x build.sh
           bash -x ./build.sh
