@@ -39,6 +39,16 @@ jobs:
           echo "=== TRACE NDK BUILD ==="
           bash -x "$ANDROID_NDK_HOME/build/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_APPLICATION_MK=./Application.mk NDK_DEBUG=0
 
+          echo "=== CHECK NDK FILES ==="
+          ls -ld "$ANDROID_NDK_HOME/build/core"
+          ls -l "$ANDROID_NDK_HOME/build/core/build-local.mk"
+
+          echo "=== CHECK MAKE FLAGS ==="
+          env | grep -E '^(MAKEFLAGS|MFLAGS|MAKELEVEL|GNUMAKE)=' || true
+
+          echo "=== NDK MAKE VERSION ==="
+          "$ANDROID_NDK_HOME/prebuilt/linux-x86_64/bin/make" --version
+
       - name: Prepare Binary
         run: |
           cp libs/arm64-v8a/libHDReflection.so ./HDReflection-arm64-v8a.so
