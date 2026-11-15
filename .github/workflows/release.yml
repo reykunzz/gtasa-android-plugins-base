@@ -1,4 +1,3 @@
-cat > .github/workflows/release.yml <<'EOF'
 name: Build and Release
 
 on:
@@ -49,4 +48,3 @@ jobs:
         with:
           files: HDReflection-arm64-v8a.so
           generate_release_notes: true
-EOF
