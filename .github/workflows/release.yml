@@ -43,16 +43,23 @@ jobs:
         run: |
           cp libs/arm64-v8a/libHDReflection.so ./HDReflection-arm64-v8a.so
 
+
+      - name: Build Mod
+        shell: bash
+        run: |
+          echo "=== NDK INTERNAL SCRIPT ==="
+          sed -n '1,160p' "$ANDROID_NDK_HOME/build/ndk-build"
+
+          echo "=== MAKE VERSION ==="
+          make --version
+
+          echo "=== NDK ENVIRONMENT ==="
+          env | sort | grep -E '^(ANDROID|NDK|MAKE|GNUMAKE)' || true
+
+          echo "=== TRACE NDK BUILD ==="
+          bash -x "$ANDROID_NDK_HOME/build/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk NDK_APPLICATION_MK=./Application.mk NDK_DEBUG=0
       - name: Upload Build Artifact
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
         uses: actions/upload-artifact@v4
         with:
           name: HDReflection-ARM64
-          path: HDReflection-arm64-v8a.so
-
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: HDReflection-arm64-v8a.so
-          generate_release_notes: true
